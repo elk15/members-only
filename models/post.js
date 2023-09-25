@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { DateTime } = require("luxon");
 
 const Schema = mongoose.Schema;
 
@@ -8,6 +9,10 @@ const PostSchema = new Schema({
     text: {type: String, required: true, maxLength: 500},
     createdAt: {type: Date, default: Date.now},
     isAnonymous: {type: Boolean, default: true},
+})
+
+PostSchema.virtual("createdAt_formatted").get(function () {
+    return DateTime.fromJSDate(this.createdAt).toLocaleString(DateTime.DATETIME_SHORT);
 })
 
 module.exports = mongoose.model("Post", PostSchema);
