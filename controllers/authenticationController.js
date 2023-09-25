@@ -17,7 +17,7 @@ exports.sign_up_post = asyncHandler(async (req, res, next) => {
         }
         user.password = hashedPassword;
         const result = await user.save();
-        res.redirect("/");
+        res.redirect("/log-in");
     });
 })
 
@@ -27,8 +27,8 @@ exports.log_in_get = asyncHandler(async (req, res, next) => {
 
 exports.log_in_post = passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/login",
-    failureMessage: true,
+    failureRedirect: "/log-in",
+    failureFlash: true,
 });
 
 exports.log_out_get = (req, res, next) => {
