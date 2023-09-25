@@ -9,6 +9,8 @@ const LocalStrategy = require("passport-local").Strategy;
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
+const postRouter = require('./routes/post');
 
 const app = express();
 
@@ -76,6 +78,8 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/', indexRouter);
+app.use('/user', userRouter);
+app.use('/post', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
