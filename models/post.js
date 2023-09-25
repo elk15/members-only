@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const { DateTime } = require("luxon");
+const Bookmark = require("../models/bookmark");
 
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-    likes: {type: Number, default: 0},
     user: {type: Schema.Types.ObjectId, ref: "User"},
     text: {type: String, required: true, maxLength: 500},
     createdAt: {type: Date, default: Date.now},

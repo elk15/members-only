@@ -38,15 +38,15 @@ exports.post_create_post = [
             })
         } else {
             await post.save();
-            res.redirect("/most-recent");
+            res.redirect("/");
         }
     })
 ]
 
-exports.post_delete_post = asyncHandler(async (req, res, next) => {
+exports.post_delete = asyncHandler(async (req, res, next) => {
     await Post.findByIdAndDelete(req.body.postid);
     await Bookmark.deleteMany({post: req.body.postid});
-    res.redirect("/");
+    res.redirect("..");
 })
 
 exports.post_update_get = asyncHandler(async (req, res, next) => {
@@ -78,13 +78,12 @@ exports.post_update_post = [
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
 
-        const oldPost = Post.find({_id: req.params.id}, "likes createdAt");
+        const oldPost = Post.find({_id: req.params.id}, "createdAt");
 
         const post = new Post({
             text: req.body.text,
             isAnonymous: req.body.anonymous[0],
             user: req.body.userid,
-            likes: oldPost.likes,
             createdAt: oldPost.createdAt,
             _id: req.params.id,
         })
