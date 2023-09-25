@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { DateTime } = require("luxon");
-const Bookmark = require("../models/bookmark");
 
 const Schema = mongoose.Schema;
 

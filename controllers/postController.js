@@ -1,6 +1,5 @@
 const asyncHandler = require("express-async-handler");
 const Post = require("../models/post");
-const Bookmark = require("../models/bookmark");
 const { body, validationResult } = require("express-validator");
 
 exports.post_create_get = (req, res, next) => {
