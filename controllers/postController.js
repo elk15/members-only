@@ -15,15 +15,12 @@ exports.post_create_post = [
         .isLength({max: 500})
         .withMessage("Cannot exceed 500 characters")
         .escape(),
-    body("anonymous.*")
-        .escape(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
 
         const post = new Post({
             text: req.body.text,
-            isAnonymous: req.body.anonymous[0],
         })
 
         if (req.body.userid) {
@@ -45,7 +42,6 @@ exports.post_create_post = [
 
 exports.post_delete = asyncHandler(async (req, res, next) => {
     await Post.findByIdAndDelete(req.body.postid);
-    await Bookmark.deleteMany({post: req.body.postid});
     res.redirect("..");
 })
 
@@ -72,8 +68,6 @@ exports.post_update_post = [
         .isLength({max: 500})
         .withMessage("Cannot exceed 500 characters")
         .escape(),
-    body("anonymous.*")
-        .escape(),
     
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -82,7 +76,6 @@ exports.post_update_post = [
 
         const post = new Post({
             text: req.body.text,
-            isAnonymous: req.body.anonymous[0],
             user: req.body.userid,
             createdAt: oldPost.createdAt,
             _id: req.params.id,

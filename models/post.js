@@ -8,7 +8,6 @@ const PostSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: "User"},
     text: {type: String, required: true, maxLength: 500},
     createdAt: {type: Date, default: Date.now},
-    isAnonymous: {type: Boolean, default: true},
 })
 
 PostSchema.virtual("createdAt_formatted").get(function () {
