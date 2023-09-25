@@ -3,7 +3,11 @@ const Post = require("../models/post");
 const { body, validationResult } = require("express-validator");
 
 exports.post_create_get = (req, res, next) => {
-    res.render("post_form", {title: "Create Post"});
+    if (req.user) {
+        res.render("post_form", {title: "Create Post"});
+    } else {
+        res.redirect("/log-in");
+    }
 }
 
 exports.post_create_post = [
@@ -20,11 +24,8 @@ exports.post_create_post = [
 
         const post = new Post({
             text: req.body.text,
+            user: req.body.userid,
         })
-
-        if (req.body.userid) {
-            post.user = req.body.userid;
-        }
 
         if (!errors.isEmpty()) {
             res.render("post_form", {
