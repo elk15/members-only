@@ -42,7 +42,7 @@ exports.post_create_post = [
 
 exports.post_delete = asyncHandler(async (req, res, next) => {
     await Post.findByIdAndDelete(req.body.postid);
-    res.redirect("..");
+    res.redirect("/");
 })
 
 exports.post_update_get = asyncHandler(async (req, res, next) => {
