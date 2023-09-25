@@ -1,0 +1,31 @@
+<header class="border-b-2 fixed top-0 w-full h-[80px] p-2 flex justify-center items-center">
+    <div class="flex-1 flex justify-between items-center max-w-[800px] font-semibold text-lg">
+      <div class="flex gap-5 items-center">
+        <h1 class="text-xl text-color">
+          Clubhouse
+        </h1>
+        <% if (currentUser) { %>
+        <a href="/post/create" class="text-color">
+          + Create Post
+        </a>
+        <% } %>
+      </div>
+      <div class="flex gap-5">
+        <% if (currentUser) { %>
+          <a href="/user/<%= currentUser._id %>/posts" class="text-color">
+            My Page
+          </a>
+          <a href="/log-out" class="hidden sm:block gradient rounded px-2 py-1 text-white">
+            Log out
+          </a>
+        <% } else { %>
+          <a href="/sign-up" class="hidden sm:block gradient rounded px-2 py-1 text-white">
+            Sign Up
+          </a>
+          <a href="/log-in" class="gradient rounded px-2 py-1 text-white">
+            Log In
+          </a>
+        <% } %>
+      </div>
+    </div>
+  </header>
