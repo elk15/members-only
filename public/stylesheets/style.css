@@ -8,14 +8,14 @@ body {
 main {
     flex: 1;
     padding-top: 90px;
-    max-width: 800px;
+    max-width: 1000px;
     width: 100%;
     padding-left: 10px;
     padding-right: 10px;
 }
 
 header {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.7);
 }
 
 .gradient {
@@ -26,4 +26,8 @@ header {
 
 .text-color {
     color: #642B73;
+}
+
+.background-color {
+    background-color: #642B73;
 }

@@ -7,7 +7,7 @@
       <div class="shadow rounded p-4 flex flex-col items-center gap-5 max-w-[500px] w-full">
           <h1 class="text-color text-2xl font-bold">Write your post!</h1>
           <form action="" method="post" class="flex flex-col items-center gap-4 flex-1 w-full">
-            <textarea name="text" id="text" required maxlength="500" class="border-[1px] border-neutral-400 rounded w-full flex-1 min-h-[200px]" placeholder="Max characters: 500"></textarea>
+            <textarea name="text" id="text" required maxlength="500" class="border-[1px] border-neutral-400 rounded w-full flex-1 min-h-[200px]" placeholder="Max characters: 500"><%= locals.post && post.text %></textarea>
             <input type="hidden" name="userid" value="<%= currentUser._id %>">
             <% if (locals.errors) { %>
                 <% errors.forEach(error =>{ %>

@@ -72,7 +72,7 @@ exports.post_update_post = [
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
 
-        const oldPost = Post.find({_id: req.params.id}, "createdAt");
+        const oldPost = await Post.findOne({_id: req.params.id}, "createdAt").exec();
 
         const post = new Post({
             text: req.body.text,

@@ -3,8 +3,10 @@
   <%- include("./partials/head.ejs") %>
   <body>
     <%- include("./partials/nav.ejs") %>
-    <main>
-      <h1>Hi@</h1>
+    <main class="flex flex-col items-center gap-5 ">
+      <% posts.forEach(post => { %>
+        <%- include("./partials/card.ejs", {post: post}) %>
+      <% }) %>
     </main>
   </body>
 </html>
