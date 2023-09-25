@@ -3,7 +3,7 @@
   <%- include("./partials/head.ejs") %>
   <body>
     <%- include("./partials/nav.ejs") %>
-    <main class="flex flex-col items-center">
+    <main class="flex flex-col items-center gap-4">
       <div class="shadow rounded p-4 flex flex-col items-center gap-5">
           <h1 class="text-color text-2xl font-bold">Log in!</h1>
           <form action="" method="post" class="flex flex-col items-center gap-4">
@@ -25,6 +25,7 @@
             </button>
           </form>
       </div>
+      <p>Don't have an account? <a href="/sign-up" class="text-color underline">Sign up</a></p>
     </main>
   </body>
 </html>
