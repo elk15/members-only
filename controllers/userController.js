@@ -17,7 +17,7 @@ exports.user_get_posts = asyncHandler(async (req, res, next) => {
 
 exports.user_delete_get = (req, res, next) => {
     if (req.user) {
-        if (req.params.id == req.user._id) {
+        if (req.params.id == req.user._id.toString()) {
             res.render("user_delete", {title: "Delete Account", userid: req.user._id});
         } else {
             res.redirect("/");

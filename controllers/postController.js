@@ -43,7 +43,7 @@ exports.post_create_post = [
 exports.post_delete = asyncHandler(async (req, res, next) => {
     if (req.user) {
         const post = await Post.findById(req.body.postid).exec();
-        if (req.user._id == post.user) {
+        if (req.user._id.toString() == post.user.toString()) {
             await Post.findByIdAndDelete(req.body.postid);
             res.redirect("/");
         } else {
@@ -63,8 +63,10 @@ exports.post_update_get = asyncHandler(async (req, res, next) => {
             err.status = 404;
             return next(err);
         }
+        console.log(req.user._id);
+        console.log(post.user)
 
-        if (req.user._id == post.user) {
+        if (req.user._id.toString() == post.user.toString()) {
             res.render("post_form", {
                 title: "Update Post",
                 post: post,
