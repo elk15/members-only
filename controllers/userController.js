@@ -4,11 +4,15 @@ const Post = require("../models/post");
 const { body, validationResult } = require("express-validator");
 
 exports.user_get_posts = asyncHandler(async (req, res, next) => {
-    const [user, userPosts] = await Promise.all([
-        User.findOne({_id: req.params.id}, "username").exec(),
-        Post.find({user: req.params.id}).sort({createdAt: -1}).populate("user").exec(),
-    ]) 
-    res.render("user_page", {title: user.username, posts: userPosts, user: user});
+    if (req.user) {
+        const [user, userPosts] = await Promise.all([
+            User.findOne({_id: req.params.id}, "username").exec(),
+            Post.find({user: req.params.id}).sort({createdAt: -1}).populate("user").exec(),
+        ]) 
+        res.render("user_page", {title: user.username, posts: userPosts, user: user});
+    } else {
+        res.redirect("/log-in");
+    }
 })
 
 exports.user_delete_get = (req, res, next) => {

@@ -41,23 +41,40 @@ exports.post_create_post = [
 ]
 
 exports.post_delete = asyncHandler(async (req, res, next) => {
-    await Post.findByIdAndDelete(req.body.postid);
-    res.redirect("/");
+    if (req.user) {
+        const post = await Post.findById(req.body.postid).exec();
+        if (req.user._id == post.user) {
+            await Post.findByIdAndDelete(req.body.postid);
+            res.redirect("/");
+        } else {
+            res.redirect("/");
+        }
+    } else {
+        res.redirect("/log-in");
+    }
 })
 
 exports.post_update_get = asyncHandler(async (req, res, next) => {
-    const post = await Post.findById(req.params.id).exec();
+    if (req.user) {
+        const post = await Post.findById(req.params.id).exec();
 
-    if (post === null) {
-        const err = new Error("Post not found");
-        err.status = 404;
-        return next(err);
+        if (post === null) {
+            const err = new Error("Post not found");
+            err.status = 404;
+            return next(err);
+        }
+
+        if (req.user._id == post.user) {
+            res.render("post_form", {
+                title: "Update Post",
+                post: post,
+            })
+        } else {
+            res.redirect("/");
+        }
+    } else {
+        res.redirect("/log-in");
     }
-
-    res.render("post_form", {
-        title: "Update Post",
-        post: post,
-    })
 })
 
 exports.post_update_post = [
