@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
+    <main class="flex flex-col items-center gap-5 ">
+        <% if (currentUser._id.toString() === user._id.toString()) { %>
+            <h1 class="text-2xl text-color font-semibold">
+                Hi, <%= user.username %> !
+            </h1>
+            <p class="text-lg font-semibold text-color">Do you want to...</p>
+            <div class="flex flex-col items-center gap-1">
+                <a class="underline text-color" href="/log-out">Log out?</a>
+                <p>or</p>
+                <a class="underline text-color" href="/user/<%= currentUser._id %>/delete">Delete your account?</a>
+            </div>
+            <h1 class="text-2xl text-color font-semibold">
+                Your Posts
+            </h1>
+        <% } else { %>
+            <h1 class="text-xl text-color font-semibold">
+                <%= user.username %> 's Posts
+            </h1>
+        <% } %>
+        <hr class="border-[1px] border-purple-200 max-w-[400px] w-full rounded">
+      <% posts.forEach(post => { %>
+        <%- include("./partials/card.ejs", {post: post}) %>
+      <% }) %>
+    </main>
+  </body>
+</html>
